@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spendlore</title>
+</head>
+<body>
+    <h1>Spendlore - Daily Expense Analyzer</h1>
+    <form method="POST">
+        <textarea name="expense_input" rows="6" cols="50" required></textarea><br><br>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if submitted %}
+        <h2>Today's Parsed Expenses:</h2>
+        <ul>
+            {% for e in expenses %}
+                <li>{{ e.category }} — ₹{{ e.amount }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
