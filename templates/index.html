@@ -2,21 +2,45 @@
 <html>
 <head>
     <title>Spendlore</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>Spendlore - Daily Expense Analyzer</h1>
-    <form method="POST">
-        <textarea name="expense_input" rows="6" cols="50" required></textarea><br><br>
-        <button type="submit">Analyze</button>
-    </form>
 
-    {% if submitted %}
-        <h2>Today's Parsed Expenses:</h2>
-        <ul>
-            {% for e in expenses %}
-                <li>{{ e.category }} — ₹{{ e.amount }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <div class="container">
+        <div class="left-pane">
+            <form method="POST">
+                <input type="text" name="category" placeholder="Purpose" required>
+                <input type="number" name="amount" placeholder="Amount wasted" required>
+                <button type="submit">Log entry</button>
+            </form>
+
+            {% if submitted %}
+                <h2>Today's Lore :</h2>
+                <ul>
+                    {% for e in expenses %}
+                        <li>
+                            {{ e[1] }} — {{ e[2] }}
+                            <a href="/delete/{{ e[0] }}">[Delete]</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <h3>Total: ₹{{ total }}</h3>
+            {% endif %}
+        </div>
+
+        <div class="right-pane">
+            <h2>Spending Overview</h2>
+            <canvas id="expenseChart" width="300" height="300"></canvas>
+        </div>
+    </div>
+
+    <script>
+    console.log("{{ expenses }}");
+    </script>
+
+
 </body>
 </html>
