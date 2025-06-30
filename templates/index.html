@@ -9,12 +9,17 @@
     <h1>Spendlore - Daily Expense Analyzer</h1>
 
     <div class="container">
-        <div class="left-pane">
+    <div class="left-pane">
+        <div class="card-box">
             <form method="POST">
-                <input type="text" name="category" placeholder="Purpose" required>
-                <input type="number" name="amount" placeholder="Amount wasted" required>
+                <div class="form-row">
+                    <input type="text" name="category" placeholder="Purpose" required>
+                    <input type="number" name="amount" placeholder="Amount wasted" required>
+                </div>
                 <button type="submit">Log entry</button>
+                <a href="/monthly"><button type="button">View Monthly Stats</button></a>
             </form>
+
 
             {% if submitted %}
                 <h2>Today's Lore :</h2>
@@ -26,16 +31,17 @@
                         </li>
                     {% endfor %}
                 </ul>
-
                 <h3>Total: ₹{{ total }}</h3>
             {% endif %}
         </div>
-
-        <div class="right-pane">
-            <h2>Spending Overview</h2>
-            <canvas id="expenseChart" width="300" height="300"></canvas>
-        </div>
     </div>
+
+    <div class="right-pane">
+        <h2>Spending Overview</h2>
+        <canvas id="expenseChart" width="300" height="300"></canvas>
+    </div>
+</div>
+
 
     <script>
     console.log("{{ expenses }}");

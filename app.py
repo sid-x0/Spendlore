@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
-from database import init_db, insert_expense, get_expenses_for_today, delete_expense
+from database import init_db, insert_expense, get_expenses_for_today, delete_expense, get_monthly_summary
 from datetime import datetime
-from database import delete_expense
-
 
 
 app = Flask(__name__)
@@ -27,8 +25,10 @@ def home():
 
     return render_template('index.html', submitted=True, expenses=today_expenses, total=total)
 
-
-
+@app.route('/monthly')
+def monthly():
+    summary = get_monthly_summary()
+    return render_template('monthly.html', summary=summary)
 
 
 if __name__ == '__main__':

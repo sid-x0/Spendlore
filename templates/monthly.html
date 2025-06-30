@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monthly Summary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Spendlore - Monthly Summary</h1>
+    <a href="/">← Back to Daily</a>
+
+    <h2>Spending This Month:</h2>
+    <ul>
+        {% for day, total in summary %}
+            <li>{{ day }} — ₹{{ total }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
