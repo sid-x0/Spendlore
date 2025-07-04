@@ -226,20 +226,23 @@ a[href*="delete"]:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 40px;
-    max-width: 1000px;
+    gap: 30px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-.left-pane, .right-pane {
+.left-pane {
     flex: 1;
+    min-width: 400px;
     text-align: left;
 }
 
 .right-pane {
+    flex: 1;
+    min-width: 450px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
 }
 .card-box {
     background-color: var(--bg-secondary);
@@ -304,7 +307,7 @@ a[href*="delete"]:hover {
     background: var(--text-primary);
     color: var(--bg-primary);
     font-weight: 600;
-    padding: 14px 24px;
+    padding: 14px 20px;
     border: 2px solid var(--text-primary);
     border-radius: var(--border-radius);
     cursor: pointer;
@@ -313,8 +316,9 @@ a[href*="delete"]:hover {
     overflow: hidden;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    font-size: 0.95rem;
-    min-width: 140px;
+    font-size: 0.9rem;
+    min-width: 160px;
+    height: 48px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -352,14 +356,15 @@ a[href*="delete"]:hover {
     background: transparent;
     color: var(--text-primary);
     font-weight: 500;
-    padding: 12px 20px;
+    padding: 14px 20px;
     border: 2px solid var(--border-light);
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: var(--transition);
     text-decoration: none;
     font-size: 0.9rem;
-    min-width: 130px;
+    min-width: 160px;
+    height: 48px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -508,8 +513,9 @@ li .expense-item {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    padding: 20px;
-    height: 400px;
+    padding: 25px;
+    width: 100%;
+    min-height: 450px;
     display: flex;
     flex-direction: column;
 }
@@ -517,10 +523,23 @@ li .expense-item {
 .chart-container h2 {
     margin-bottom: 20px;
     text-align: center;
+    flex-shrink: 0;
+}
+
+.chart-wrapper {
+    flex: 1;
+    position: relative;
+    min-height: 350px;
+    width: 100%;
 }
 
 .chart-container canvas {
-    flex: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
 }
 
 /* Monthly Summary Page Styling */
@@ -569,51 +588,82 @@ li .expense-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--border-light);
+    margin-bottom: 15px;
+    padding: 15px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.month-header:hover {
+    background: var(--border-color);
+    border-color: var(--border-light);
+}
+
+.month-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.month-info h2 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.dropdown-icon {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: var(--transition);
 }
 
 .month-total {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: var(--text-primary);
-    background: var(--bg-tertiary);
-    padding: 8px 16px;
-    border-radius: 20px;
+    background: var(--bg-secondary);
+    padding: 6px 12px;
+    border-radius: 15px;
     border: 1px solid var(--border-color);
 }
 
 .daily-expenses {
     display: grid;
-    gap: 12px;
+    gap: 8px;
+    margin-top: 15px;
+    padding: 0 15px;
 }
 
 .expense-day {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 16px;
-    background: var(--bg-tertiary);
+    padding: 8px 12px;
+    background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 6px;
     transition: var(--transition);
+    font-size: 0.85rem;
 }
 
 .expense-day:hover {
     border-color: var(--border-light);
-    transform: translateX(4px);
+    transform: translateX(2px);
 }
 
 .day-date {
     color: var(--text-secondary);
-    font-weight: 500;
+    font-weight: 400;
+    font-size: 0.8rem;
 }
 
 .day-amount {
     color: var(--text-primary);
-    font-weight: 600;
-    font-size: 1.1em;
+    font-weight: 500;
+    font-size: 0.85rem;
 }
 
 .no-data {
@@ -631,20 +681,62 @@ li .expense-item {
 @media (max-width: 768px) {
     .month-header {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
         gap: 10px;
+        padding: 12px;
+    }
+    
+    .month-info {
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .month-info h2 {
+        font-size: 1.1rem;
     }
     
     .month-total {
-        align-self: flex-end;
+        align-self: center;
+        font-size: 0.8rem;
+        padding: 4px 10px;
     }
     
     .expense-day {
-        padding: 10px 12px;
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .day-date {
+        font-size: 0.75rem;
+    }
+    
+    .day-amount {
+        font-size: 0.8rem;
+    }
+    
+    .daily-expenses {
+        padding: 0 10px;
     }
     
     .chart-container {
-        height: 300px;
+        min-height: 300px;
         padding: 15px;
+    }
+    
+    .chart-wrapper {
+        min-height: 250px;
+    }
+    
+    .container {
+        flex-direction: column;
+        gap: 20px;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+    
+    .left-pane,
+    .right-pane {
+        min-width: auto;
+        width: 100%;
     }
 }

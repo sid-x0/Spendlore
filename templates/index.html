@@ -54,7 +54,9 @@
     <div class="right-pane">
         <div class="chart-container">
             <h2>Monthly Expenses</h2>
-            <canvas id="monthlyChart" width="400" height="300"></canvas>
+            <div class="chart-wrapper">
+                <canvas id="monthlyChart"></canvas>
+            </div>
         </div>
     </div>
 </div>
@@ -87,14 +89,26 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                aspectRatio: 1.8,
+                layout: {
+                    padding: {
+                        top: 10,
+                        right: 10,
+                        bottom: 10,
+                        left: 10
+                    }
+                },
                 plugins: {
                     legend: {
+                        display: true,
+                        position: 'top',
                         labels: {
                             color: '#ffffff',
                             font: {
                                 size: 14,
                                 family: 'Inter'
-                            }
+                            },
+                            padding: 20
                         }
                     }
                 },
@@ -104,27 +118,49 @@
                         ticks: {
                             color: '#ffffff',
                             font: {
-                                size: 12
+                                size: 11
                             },
+                            padding: 10,
                             callback: function(value) {
-                                return '₹' + value;
+                                return '₹' + value.toLocaleString();
                             }
                         },
                         grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
+                            color: 'rgba(255, 255, 255, 0.1)',
+                            drawBorder: false
+                        },
+                        border: {
+                            display: false
                         }
                     },
                     x: {
                         ticks: {
                             color: '#ffffff',
                             font: {
-                                size: 12
-                            }
+                                size: 11
+                            },
+                            maxRotation: 45,
+                            minRotation: 0,
+                            padding: 10
                         },
                         grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
+                            color: 'rgba(255, 255, 255, 0.1)',
+                            drawBorder: false
+                        },
+                        border: {
+                            display: false
                         }
                     }
+                },
+                elements: {
+                    point: {
+                        hoverBackgroundColor: '#ffffff',
+                        hoverBorderColor: '#000000'
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });

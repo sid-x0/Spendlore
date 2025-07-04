@@ -19,12 +19,15 @@
             {% if summary %}
                 {% for month, data in summary.items() %}
                     <div class="month-section">
-                        <h2 class="month-header">
-                            {{ month | month_name }} 
+                        <div class="month-header" onclick="toggleMonth('{{ loop.index0 }}')">
+                            <div class="month-info">
+                                <h2>{{ month | month_name }}</h2>
+                                <span class="dropdown-icon" id="icon-{{ loop.index0 }}">▼</span>
+                            </div>
                             <span class="month-total">Total: ₹{{ data.total }}</span>
-                        </h2>
+                        </div>
                         
-                        <div class="daily-expenses">
+                        <div class="daily-expenses" id="expenses-{{ loop.index0 }}" style="display: none;">
                             {% for day, amount in data.daily_expenses %}
                                 <div class="expense-day">
                                     <span class="day-date">{{ day | format_date }}</span>
@@ -42,5 +45,20 @@
             {% endif %}
         </div>
     </div>
+    
+    <script>
+        function toggleMonth(monthIndex) {
+            const expensesDiv = document.getElementById('expenses-' + monthIndex);
+            const icon = document.getElementById('icon-' + monthIndex);
+            
+            if (expensesDiv.style.display === 'none' || expensesDiv.style.display === '') {
+                expensesDiv.style.display = 'grid';
+                icon.innerHTML = '▲'; // Up arrow
+            } else {
+                expensesDiv.style.display = 'none';
+                icon.innerHTML = '▼'; // Down arrow
+            }
+        }
+    </script>
 </body>
 </html>

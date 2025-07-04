@@ -1,4 +1,4 @@
-# 💰 Spendlore - Daily Expense Analyzer
+# 💰 Spendlore 
 
 Spendlore is a minimal Flask web app to log and visualize your daily expenses. It supports adding entries, viewing analytics, and generating monthly summaries, all with a clean UI and lightweight backend.
 
@@ -27,12 +27,8 @@ Spendlore is a minimal Flask web app to log and visualize your daily expenses. I
 - **Smooth Animations**: Elegant hover effects and transitions
 - **Intuitive UI**: User-friendly interface with clear visual hierarchy
 
-## 🚀 Quick Start
 
-### Prerequisites
-- Python 3.x
-- Flask
-- Modern web browser
+
 
 
 ## 📁 Project Structure
