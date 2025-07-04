@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Spendlore - Daily Expense Analyzer</h1>
+    <h1>Spendlore</h1>
 
     <div class="container">
     <div class="left-pane">
@@ -16,8 +16,16 @@
                     <input type="text" name="category" placeholder="Purpose" required>
                     <input type="number" name="amount" placeholder="Amount wasted" required>
                 </div>
-                <button type="submit">Log entry</button>
-                <a href="/monthly"><button type="button">View Monthly Stats</button></a>
+                <div class="button-group">
+                    <button type="submit" class="primary-btn">
+                        <i class="icon-plus"></i>
+                        Log Entry
+                    </button>
+                    <a href="/monthly" class="secondary-btn">
+                        <i class="icon-chart"></i>
+                        Monthly Stats
+                    </a>
+                </div>
             </form>
 
 
@@ -26,8 +34,15 @@
                 <ul>
                     {% for e in expenses %}
                         <li>
-                            {{ e[1] }} — {{ e[2] }}
-                            <a href="/delete/{{ e[0] }}">[Delete]</a>
+                            <div class="expense-item">
+                                <span class="expense-details">
+                                    <strong>{{ e[1] }}</strong> — ₹{{ e[2] }}
+                                </span>
+                                <a href="/delete/{{ e[0] }}" class="delete-btn">
+                                    <i class="icon-delete"></i>
+                                    Delete
+                                </a>
+                            </div>
                         </li>
                     {% endfor %}
                 </ul>
@@ -37,14 +52,82 @@
     </div>
 
     <div class="right-pane">
-        <h2>Spending Overview</h2>
-        <canvas id="expenseChart" width="300" height="300"></canvas>
+        <div class="chart-container">
+            <h2>Monthly Expenses</h2>
+            <canvas id="monthlyChart" width="400" height="300"></canvas>
+        </div>
     </div>
 </div>
 
 
     <script>
-    console.log("{{ expenses }}");
+        // Monthly expenses chart
+        const ctx = document.getElementById('monthlyChart').getContext('2d');
+        const chartData = {{ chart_data | tojson }};
+        
+        const monthlyChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartData.months,
+                datasets: [{
+                    label: 'Monthly Expenses (₹)',
+                    data: chartData.amounts,
+                    borderColor: '#ffffff',
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#000000',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#ffffff',
+                            font: {
+                                size: 14,
+                                family: 'Inter'
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#ffffff',
+                            font: {
+                                size: 12
+                            },
+                            callback: function(value) {
+                                return '₹' + value;
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#ffffff',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
     </script>
 
 

@@ -1,65 +1,227 @@
+/* CSS Variables for Black & White Theme */
+:root {
+    --primary-color: #ffffff;
+    --primary-hover: #f0f0f0;
+    --secondary-color: #666666;
+    --accent-color: #333333;
+    --bg-primary: #000000;
+    --bg-secondary: #111111;
+    --bg-tertiary: #222222;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #888888;
+    --border-color: #333333;
+    --border-light: #444444;
+    --shadow-light: 0 2px 10px rgba(255,255,255,0.1);
+    --shadow-medium: 0 4px 20px rgba(255,255,255,0.15);
+    --shadow-heavy: 0 8px 30px rgba(255,255,255,0.2);
+    --gradient-primary: linear-gradient(135deg, #ffffff, #f0f0f0);
+    --gradient-secondary: linear-gradient(135deg, #333333, #555555);
+    --border-radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #121212;
-    color: #e0e0e0;
-    text-align: center;
-    padding: 30px;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg-primary);
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.01) 0%, transparent 50%);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
 }
 
+/* Enhanced typography */
 h1 {
-    font-size: 2rem;
-    color: #9f79ee;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+/* Form styling */
 form {
-    margin-top: 20px;
+    margin-top: 1.5rem;
 }
 
 input, button {
-    padding: 10px;
-    margin: 5px;
+    padding: 12px 16px;
+    margin: 8px 0;
     font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid #444;
-    background-color: #1e1e1e;
-    color: #fff;
+    font-family: inherit;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    transition: var(--transition);
+    outline: none;
+}
+
+input {
+    width: 100%;
+    backdrop-filter: blur(10px);
+}
+
+input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(159, 121, 238, 0.1);
+    transform: translateY(-2px);
 }
 
 input::placeholder {
-    color: #aaa;
+    color: var(--text-muted);
+    opacity: 0.8;
 }
 
 button {
-    background-color: #9f79ee;
-    color: #121212;
+    background: var(--gradient-primary);
+    color: var(--text-primary);
+    font-weight: 600;
     cursor: pointer;
     border: none;
-    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 120px;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
 }
 
 button:hover {
-    background-color: #b18eff;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
 }
 
+button:hover::before {
+    left: 100%;
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+/* List and item styling */
 ul {
     list-style-type: none;
     padding: 0;
+    margin: 1rem 0;
 }
 
 li {
-    background: #1e1e1e;
-    margin: 8px auto;
-    padding: 10px;
-    border-radius: 10px;
-    width: fit-content;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    background: var(--bg-secondary);
+    backdrop-filter: blur(10px);
+    margin: 12px 0;
+    padding: 16px 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
 }
 
-a {
-    color: #ff6b6b;
-    margin-left: 10px;
-    text-decoration: none;
+li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gradient-primary);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
 }
+
+li:hover {
+    transform: translateX(8px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-color);
+}
+
+li:hover::before {
+    transform: scaleY(1);
+}
+
+/* Link styling */
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    margin-left: 12px;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+a:hover {
+    color: #ff8e8e;
+    text-shadow: 0 0 8px rgba(255, 107, 107, 0.5);
+}
+
+a[href*="delete"] {
+    background: rgba(255, 107, 107, 0.1);
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    margin-left: 8px;
+    font-size: 0.85rem;
+}
+
+a[href*="delete"]:hover {
+    background: rgba(255, 107, 107, 0.2);
+    transform: scale(1.05);
+}
+
 .container {
     display: flex;
     justify-content: space-between;
@@ -80,10 +242,11 @@ a {
     align-items: center;
 }
 .card-box {
-    background-color: #1e1e1e;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
     padding: 20px;
     border-radius: 16px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow-light);
     max-width: 90%;
     margin: 0 auto;
 }
@@ -118,11 +281,370 @@ a {
 
 /* widen the card box */
 .card-box {
-    background-color: #1e1e1e;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
     padding: 20px;
     border-radius: 16px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.3);
+    box-shadow: var(--shadow-light);
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+}
+/* Button Group Styling */
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Primary Button */
+.primary-btn {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    font-weight: 600;
+    padding: 14px 24px;
+    border: 2px solid var(--text-primary);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.95rem;
+    min-width: 140px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.primary-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+    transition: left 0.5s;
+}
+
+.primary-btn:hover {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.primary-btn:hover::before {
+    left: 100%;
+}
+
+.primary-btn:active {
+    transform: translateY(0);
+}
+
+/* Secondary Button */
+.secondary-btn {
+    background: transparent;
+    color: var(--text-primary);
+    font-weight: 500;
+    padding: 12px 20px;
+    border: 2px solid var(--border-light);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    font-size: 0.9rem;
+    min-width: 130px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    text-transform: capitalize;
+    letter-spacing: 0.3px;
+}
+
+.secondary-btn:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border-color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-light);
+    text-shadow: none;
+}
+
+/* Icon styling */
+.icon-plus::before {
+    content: '+';
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.icon-chart::before {
+    content: '📊';
+    font-size: 1em;
+}
+
+/* Responsive button group */
+@media (max-width: 768px) {
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+/* Legacy small button for backward compatibility */
+.small-btn {
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.small-btn:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+/* Expense Item Styling */
+.expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.expense-details {
+    flex: 1;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.expense-details strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Delete Button */
+.delete-btn {
+    background: transparent;
+    color: var(--text-muted);
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 0;
+    min-width: fit-content;
+    white-space: nowrap;
+}
+
+.delete-btn:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border-color: var(--text-primary);
+    transform: scale(1.05);
+    text-shadow: none;
+}
+
+.delete-btn:active {
+    transform: scale(0.98);
+}
+
+/* Delete icon */
+.icon-delete::before {
+    content: '×';
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Enhanced list items for expense display */
+li .expense-item {
+    padding: 0;
+    margin: 0;
+}
+
+/* Mobile responsiveness for expense items */
+@media (max-width: 480px) {
+    .expense-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .delete-btn {
+        align-self: flex-end;
+    }
+}
+
+/* Chart Container Styling */
+.chart-container {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.chart-container canvas {
+    flex: 1;
+}
+
+/* Monthly Summary Page Styling */
+.navigation {
+    margin-bottom: 30px;
+}
+
+.back-btn {
+    background: transparent;
+    color: var(--text-primary);
+    padding: 10px 16px;
+    border: 2px solid var(--border-light);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+.back-btn:hover {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border-color: var(--text-primary);
+    text-shadow: none;
+}
+
+.icon-back::before {
+    content: '←';
+    font-size: 1.2em;
+}
+
+.month-section {
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 30px;
+}
+
+.month-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.month-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.month-total {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.daily-expenses {
+    display: grid;
+    gap: 12px;
+}
+
+.expense-day {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.expense-day:hover {
+    border-color: var(--border-light);
+    transform: translateX(4px);
+}
+
+.day-date {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.day-amount {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.no-data {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+}
+
+.no-data h3 {
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+/* Responsive design for monthly summary */
+@media (max-width: 768px) {
+    .month-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .month-total {
+        align-self: flex-end;
+    }
+    
+    .expense-day {
+        padding: 10px 12px;
+    }
+    
+    .chart-container {
+        height: 300px;
+        padding: 15px;
+    }
 }
